@@ -1,1 +1,1 @@
-let () = print_endline AdventOfCode.Day1.hello
+AdventOfCode.Day1.run
