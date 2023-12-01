@@ -1,0 +1,4 @@
+(executable
+ (public_name advent_of_code_ocaml)
+ (name main)
+ (libraries AdventOfCode))
