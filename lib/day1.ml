@@ -10,6 +10,12 @@ let first_and_last_number_of_each_line = List.map first_and_last_number day_1_da
 
 let combined_first_and_last_numbers_of_each_line = List.map (fun (a, b) -> a * 10 + b) first_and_last_number_of_each_line
 
-let solution = Utils.sum combined_first_and_last_numbers_of_each_line
+let part_1_solution = Utils.sum combined_first_and_last_numbers_of_each_line;;
 
-let run = print_endline (string_of_int solution)
+let part_2_solution = 42
+
+type part = One | Two
+
+let run = function
+  | One -> print_endline (string_of_int part_1_solution)
+  | Two -> print_endline (string_of_int part_2_solution)
