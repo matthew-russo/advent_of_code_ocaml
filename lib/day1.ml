@@ -1,5 +1,4 @@
-let day_1_data_lines = Utils.read_lines "data/day1/part1.txt"
-
+let day_1_data_lines = Utils.read_lines "data/day1.txt"
 
 let combine_first_and_last_digits digits = List.map (fun (a, b) -> a * 10 + b) digits
 
