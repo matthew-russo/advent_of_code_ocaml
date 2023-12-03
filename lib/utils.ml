@@ -3,8 +3,7 @@ type part = One | Two
 exception InvalidState of string
 
 (* given a filename, read the entire file to a string *)
-let read_file file =
-  In_channel.with_open_bin file In_channel.input_all
+let read_file file = In_channel.with_open_bin file In_channel.input_all
 
 (* given a filename, read it to a list of strings, one for each line *)
 let read_lines file =
@@ -15,10 +14,7 @@ let read_lines file =
 let to_chars input = input |> String.to_seq |> List.of_seq
 
 (* a function that will validate if the input is a digit *)
-let is_digit digit =
-    match digit with
-     '0' .. '9' -> true
-    | _ -> false
+let is_digit digit = match digit with '0' .. '9' -> true | _ -> false
 
 (* a function that will add the elements of a list together *)
 let sum xs = List.fold_left (fun x y -> x + y) 0 xs
