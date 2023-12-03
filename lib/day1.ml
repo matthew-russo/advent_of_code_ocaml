@@ -34,10 +34,8 @@ let chomp_next s =
   else if String.starts_with ~prefix:"9" s then (Some 9, String.sub s 1 ((String.length s) - 1))
   else (None, String.sub s 1 ((String.length s) - 1))
 
-exception InvalidState of string
-
 let consume_token current_state chomped = match (current_state, chomped) with
-    ({first = None; last = Some _}, _) -> raise (InvalidState "first is None but last is Some")
+    ({first = None; last = Some _}, _) -> raise (Utils.InvalidState "first is None but last is Some")
   | ({first = None; last = None}, Some c) -> {first = Some c; last = Some c}
   | ({first = Some f; _}, Some c) -> {first = Some f; last = Some c}
   | (s, None) -> s
@@ -52,7 +50,7 @@ let rec parse_line current_state line =
 
 let unwrap_state = function
   | { first = Some a; last = Some b } -> (a, b)
-  | _ -> raise (InvalidState "first and last are not some")
+  | _ -> raise (Utils.InvalidState "first and last are not some")
 
 let part_2_solution =
   let parsed_line_states = List.map (fun l -> parse_line empty_state l) day_1_data_lines in
