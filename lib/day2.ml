@@ -44,8 +44,12 @@ let part_1_solution =
   let valid_games = List.filter game_is_valid games in
   let valid_game_ids = List.map (fun g -> g.id) valid_games in
   Utils.sum valid_game_ids
-let part_2_solution = "TODO: unimplemented"
+
+let part_2_solution =
+  let games = List.map parse_line day_2_data_lines in
+  let powers = List.map (fun g -> g.dice.red * g.dice.green * g.dice.blue) games in
+  Utils.sum powers
 
 let run = function
   | Utils.One -> print_endline (string_of_int part_1_solution)
-  | Utils.Two -> print_endline part_2_solution
+  | Utils.Two -> print_endline (string_of_int part_2_solution)
