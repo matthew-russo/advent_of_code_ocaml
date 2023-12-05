@@ -21,3 +21,6 @@ let sum xs = List.fold_left (fun x y -> x + y) 0 xs
 
 (* convert a char to its integer repr, e.g. '1' -> 1, '7' -> 7 *)
 let char_to_int c = int_of_string (String.make 1 c)
+
+(* generate a range of 1..n *)
+let range n = List.map (fun x -> x - 1) (List.init n succ)
