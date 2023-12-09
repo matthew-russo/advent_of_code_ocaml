@@ -54,3 +54,4 @@ let part_2_solution = "TODO: unimplemented"
 let run = function
   | Utils.One -> print_endline (string_of_int part_1_solution)
   | Utils.Two -> print_endline part_2_solution
+  | Utils.Debug -> print_endline "debug"

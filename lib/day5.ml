@@ -30,6 +30,16 @@ type map_ty =
   | LightToTemp
   | TempToHumidity
   | HumidityToLocation
+let string_of_map_ty ty =
+  match ty with
+  | Control -> "control"
+  | SeedToSoil -> "seed-to-soil"
+  | SoilToFertilizer -> "soil-to-fertilizer"
+  | FertilizerToWater -> "fertilizer-to-water"
+  | WaterToLight -> "water-to-light"
+  | LightToTemp -> "light-to-temp"
+  | TempToHumidity -> "temp-to-humidity"
+  | HumidityToLocation -> "humidity-to-location"
 
 module AlmanacResourceMap = Map.Make (
   struct
@@ -120,7 +130,7 @@ let parse_map_decl state line =
 
 let parse_range state line =
   match String.split_on_char ' ' line with
-  | [src; dst; size] -> with_range state { src = int_of_string src; dst = int_of_string dst; size = int_of_string size; }
+  | [dst; src; size] -> with_range state { src = int_of_string src; dst = int_of_string dst; size = int_of_string size; }
   | _ -> raise (Utils.InvalidState "Range had more than 3 space-separated elements")
 
 let parse_line state line =
@@ -160,6 +170,45 @@ let part_1_solution =
   lowest_location almanac
 let part_2_solution = "TODO: unimplemented"
 
+let debug_str = "seeds: 79 14 55 13
+
+seed-to-soil map:
+50 98 2
+52 50 48
+
+soil-to-fertilizer map:
+0 15 37
+37 52 2
+39 0 15
+
+fertilizer-to-water map:
+49 53 8
+0 11 42
+42 0 7
+57 7 4
+
+water-to-light map:
+88 18 7
+18 25 70
+
+light-to-temperature map:
+45 77 23
+81 45 19
+68 64 13
+
+temperature-to-humidity map:
+0 69 1
+1 0 69
+
+humidity-to-location map:
+60 56 37
+56 93 4"
+
+let debug =
+  let almanac = parse_almanac (String.split_on_char '\n' (String.trim debug_str)) in
+  lowest_location almanac
+
 let run = function
   | Utils.One -> print_endline (string_of_int part_1_solution)
   | Utils.Two -> print_endline part_2_solution
+  | Utils.Debug -> print_endline (string_of_int debug)

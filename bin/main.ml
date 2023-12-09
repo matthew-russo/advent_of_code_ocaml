@@ -15,14 +15,19 @@ Printf.printf "Running advent of code solution for Day %d, Part %d\n%!",
   !part
 
 let run = function
+  | 1, 3 -> AdventOfCode.Day1.run Debug
   | 1, 1 -> AdventOfCode.Day1.run One
   | 1, 2 -> AdventOfCode.Day1.run Two
+  | 2, 3 -> AdventOfCode.Day2.run Debug
   | 2, 1 -> AdventOfCode.Day2.run One
   | 2, 2 -> AdventOfCode.Day2.run Two
+  | 3, 3 -> AdventOfCode.Day3.run Debug
   | 3, 1 -> AdventOfCode.Day3.run One
   | 3, 2 -> AdventOfCode.Day3.run Two
+  | 4, 3 -> AdventOfCode.Day4.run Debug
   | 4, 1 -> AdventOfCode.Day4.run One
   | 4, 2 -> AdventOfCode.Day4.run Two
+  | 5, 3 -> AdventOfCode.Day5.run Debug
   | 5, 1 -> AdventOfCode.Day5.run One
   | 5, 2 -> AdventOfCode.Day5.run Two
   | _ -> raise (Invalid_argument "unknown day and part")

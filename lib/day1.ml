@@ -90,3 +90,4 @@ let part_2_solution =
 let run = function
   | Utils.One -> print_endline (string_of_int part_1_solution)
   | Utils.Two -> print_endline (string_of_int part_2_solution)
+  | Utils.Debug -> print_endline "debug"

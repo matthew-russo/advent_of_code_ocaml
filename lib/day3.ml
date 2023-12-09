@@ -44,12 +44,12 @@ let flush state =
     let potential_part = { num = int_of_string (String.of_seq (List.to_seq (List.rev cs))); coordinates = coordinates; } in
     { schematic = add_potential_part state.schematic potential_part; row = state.row; col = state.col; pending = []; }
 
-let handle_char parse_state c = 
-  match c with 
+let handle_char parse_state c =
+  match c with
   | '.' -> flush parse_state
   | '0'..'9' -> add_pending_character parse_state c
-  | _ -> 
-    let parse_state = flush parse_state in 
+  | _ ->
+    let parse_state = flush parse_state in
     parse_state_add_symbol parse_state (get_coord parse_state)
 
 let parse_line parse_state line =
@@ -61,10 +61,10 @@ let parse_schematic lines =
 let is_valid_part part spots =
   List.exists (fun coord -> Option.is_some (CoordinateSet.find_opt coord spots)) part.coordinates
 
-let find_valid_parts schematic = 
+let find_valid_parts schematic =
   List.filter (fun part -> is_valid_part part schematic.symbol_adjacent_spots) schematic.potential_parts
 
-let part_1_solution = 
+let part_1_solution =
   let parse_state = parse_schematic day_3_data_chars in
   let parts = find_valid_parts parse_state.schematic in
   Utils.sum (List.map (fun p -> p.num) parts)
@@ -74,3 +74,4 @@ let part_2_solution = "TODO: unimplemented"
 let run = function
   | Utils.One -> print_endline (string_of_int part_1_solution)
   | Utils.Two -> print_endline part_2_solution
+  | Utils.Debug -> print_endline "debug"

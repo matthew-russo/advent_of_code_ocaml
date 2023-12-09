@@ -1,4 +1,4 @@
-type part = One | Two
+type part = One | Two | Debug
 
 exception InvalidState of string
 
