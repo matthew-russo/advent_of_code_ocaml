@@ -24,3 +24,6 @@ let char_to_int c = int_of_string (String.make 1 c)
 
 (* generate a range of 1..n *)
 let range n = List.map (fun x -> x - 1) (List.init n succ)
+
+(* filter a list of strings, removing empty ones *)
+let filter_empty s = List.filter (fun s -> s <> "") s
