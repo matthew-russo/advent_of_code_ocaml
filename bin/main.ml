@@ -30,6 +30,9 @@ let run = function
   | 5, 3 -> AdventOfCode.Day5.run Debug
   | 5, 1 -> AdventOfCode.Day5.run One
   | 5, 2 -> AdventOfCode.Day5.run Two
+  | 6, 3 -> AdventOfCode.Day6.run Debug
+  | 6, 1 -> AdventOfCode.Day6.run One
+  | 6, 2 -> AdventOfCode.Day6.run Two
   | _ -> raise (Invalid_argument "unknown day and part")
 ;;
 

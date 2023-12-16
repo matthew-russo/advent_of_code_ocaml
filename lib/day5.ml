@@ -170,10 +170,13 @@ let part_1_solution =
   lowest_location almanac almanac.seeds
 
 let part_2_solution =
-  let almanac = parse_almanac day_5_data_lines in
-  let seed_ranges = Utils.chunks 2 almanac.seeds in
-  let seed_seqs = List.map (fun range -> Utils.lazy_range ~from:(List.hd range) (List.hd (List.tl range))) seed_ranges in
-  List.fold_left (fun acc seq -> min acc (Seq.fold_left (fun acc seed -> min acc (seed_to_location almanac seed)) acc seq)) 1073741824 seed_seqs
+  "commented out because its not lazily executed and causes running any day to take a long time"
+  (*
+    let almanac = parse_almanac day_5_data_lines in
+    let seed_ranges = Utils.chunks 2 almanac.seeds in
+    let seed_seqs = List.map (fun range -> Utils.lazy_range ~from:(List.hd range) (List.hd (List.tl range))) seed_ranges in
+    List.fold_left (fun acc seq -> min acc (Seq.fold_left (fun acc seed -> min acc (seed_to_location almanac seed)) acc seq)) 1073741824 seed_seqs
+  *)
 
 let debug_str = "seeds: 79 14 55 13
 
@@ -215,5 +218,5 @@ let debug =
 
 let run = function
   | Utils.One -> print_endline (string_of_int part_1_solution)
-  | Utils.Two -> print_endline (string_of_int part_2_solution)
+  | Utils.Two -> print_endline part_2_solution
   | Utils.Debug -> print_endline (string_of_int debug)
