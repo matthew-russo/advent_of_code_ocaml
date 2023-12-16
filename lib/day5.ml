@@ -161,14 +161,19 @@ let seed_to_location (al : almanac) (seed : int) : int =
   let pipeline = [SeedToSoil; SoilToFertilizer; FertilizerToWater; WaterToLight; LightToTemp; TempToHumidity; HumidityToLocation] in
   List.fold_left (fun input map_ty -> resolve_input al map_ty input) seed pipeline
 
-let lowest_location (al : almanac) : int =
-  let locations = List.map (fun s -> seed_to_location al s) al.seeds in
+let lowest_location (al : almanac) (seeds : int list) : int =
+  let locations = List.map (fun s -> seed_to_location al s) seeds in
   List.fold_left min (List.hd locations) (List.tl locations)
 
 let part_1_solution =
   let almanac = parse_almanac day_5_data_lines in
-  lowest_location almanac
-let part_2_solution = "TODO: unimplemented"
+  lowest_location almanac almanac.seeds
+
+let part_2_solution =
+  let almanac = parse_almanac day_5_data_lines in
+  let seed_ranges = Utils.chunks 2 almanac.seeds in
+  let seed_seqs = List.map (fun range -> Utils.lazy_range ~from:(List.hd range) (List.hd (List.tl range))) seed_ranges in
+  List.fold_left (fun acc seq -> min acc (Seq.fold_left (fun acc seed -> min acc (seed_to_location almanac seed)) acc seq)) 1073741824 seed_seqs
 
 let debug_str = "seeds: 79 14 55 13
 
@@ -206,9 +211,9 @@ humidity-to-location map:
 
 let debug =
   let almanac = parse_almanac (String.split_on_char '\n' (String.trim debug_str)) in
-  lowest_location almanac
+  lowest_location almanac almanac.seeds
 
 let run = function
   | Utils.One -> print_endline (string_of_int part_1_solution)
-  | Utils.Two -> print_endline part_2_solution
+  | Utils.Two -> print_endline (string_of_int part_2_solution)
   | Utils.Debug -> print_endline (string_of_int debug)
